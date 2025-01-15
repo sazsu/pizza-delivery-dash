@@ -1,0 +1,14 @@
+line-length = 79
+show-fixes = true
+
+[format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = true
+
+[lint]
+extend-select = [
+    "F", "E", "W", "C90",
+    "UP", "N", "ANN", "PERF",
+    "RUF"
+]

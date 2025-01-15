@@ -12,3 +12,10 @@ pizza-delivery-dash = "pizza_delivery_dash:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "isort>=5.13.2",
+    "pre-commit>=4.0.1",
+    "ruff>=0.9.1",
+]
