@@ -1,0 +1,14 @@
+[project]
+name = "pizza-delivery-dash"
+version = "0.1.0"
+description = "Play as a pizza delivery guy racing against the clock to collect the necessary ingredients while fighting off hungry customers and trying to keep his job"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+pizza-delivery-dash = "pizza_delivery_dash:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
