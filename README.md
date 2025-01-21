@@ -8,3 +8,71 @@
 
 ## Сюжет
 Вы устроились на работу в местную пиццерию, однако ваша работа не совсем обычная. Вам придется столкнуться с препятствиями и пытаться заслужить доверие руководства, чтобы вас не уволили. Из-за нехватки финансирования и кадров, вам приходится совмещать работу повара и доставщика пиццы. Ингредиенты для пиццы вам тоже приходится собирать самостоятельно. Постарайтесь всё успеть, чтобы клиенты остались довольны.
+
+## Пререквизиты
+
+- [git](https://git-scm.com/downloads)
+- [Python](https://www.python.org/downloads/) (>=3.12)
+- [uv](https://docs.astral.sh/uv/) (опционально)
+
+## Быстрый старт
+
+#### Клонируйте проект
+
+```console
+git clone https://github.com/sazsu/pizza-delivery-dash.git
+```
+
+#### Перейдите в директорию проекта
+
+```console
+cd pizza-delivery-dash
+```
+
+#### Установите зависимости (uv)
+
+##### С dev зависимостями
+
+```console
+uv sync --all-extras
+```
+
+##### Без dev зависимостей
+
+```console
+uv sync --no-dev
+```
+
+#### Установите зависимости (pip)
+
+##### Создайте и активируйте виртуальное окружение
+
+```console
+python -m venv .venv
+
+# Для Linux и macOS
+source .venv/bin/activate
+
+# Для Windows
+.venv\Scripts\activate
+```
+
+##### Установите зависимости из requirements.txt
+
+```console
+python -m pip install -r requirements.txt
+```
+
+#### Запустите проект
+
+##### uv
+
+```console
+uv run python src/main.py
+```
+
+##### python
+
+```console
+python src/main.py
+```
