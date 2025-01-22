@@ -19,13 +19,13 @@
 
 #### Клонируйте проект
 
-```console
+```shell
 git clone https://github.com/sazsu/pizza-delivery-dash.git
 ```
 
 #### Перейдите в директорию проекта
 
-```console
+```shell
 cd pizza-delivery-dash
 ```
 
@@ -33,13 +33,13 @@ cd pizza-delivery-dash
 
 ##### С dev зависимостями
 
-```console
+```shell
 uv sync --all-extras
 ```
 
 ##### Без dev зависимостей
 
-```console
+```shell
 uv sync --no-dev
 ```
 
@@ -47,7 +47,7 @@ uv sync --no-dev
 
 ##### Создайте и активируйте виртуальное окружение
 
-```console
+```shell
 python -m venv .venv
 
 # Для Linux и macOS
@@ -59,7 +59,7 @@ source .venv/bin/activate
 
 ##### Установите зависимости из requirements.txt
 
-```console
+```shell
 python -m pip install -r requirements.txt
 ```
 
@@ -67,12 +67,12 @@ python -m pip install -r requirements.txt
 
 ##### uv
 
-```console
+```shell
 uv run python src/main.py
 ```
 
 ##### python
 
-```console
+```shell
 python src/main.py
 ```
