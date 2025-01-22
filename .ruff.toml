@@ -10,5 +10,5 @@ skip-magic-trailing-comma = true
 extend-select = [
     "F", "E", "W", "C90",
     "UP", "N", "ANN", "PERF",
-    "RUF"
+    "RUF", "I",
 ]
