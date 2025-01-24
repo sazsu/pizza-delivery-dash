@@ -7,10 +7,11 @@ class State(enum.Enum):
     initialized = 'initialized'
     game_playing = 'game_playing'
     main_menu = 'main_menu'
-    city = 'city'
-    shop = 'shop'
-    pizzeria = 'pizzeria'
-    statistics = 'statistics'
+    inside_city = 'inside_city'
+    inside_shop = 'inside_shop'
+    inside_pizzeria = 'inside_pizzeria'
+    delivering_pizza = 'delivering_pizza'
+    showing_statistics = 'showing_statistics'
     quitting = 'quitting'
 
 
