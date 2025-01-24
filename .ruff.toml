@@ -4,10 +4,10 @@ show-fixes = true
 [format]
 quote-style = "single"
 indent-style = "space"
-skip-magic-trailing-comma = true
+skip-magic-trailing-comma = false
 
 [lint]
-extend-select = [
+select = [
     "F", "E", "W", "C90",
     "UP", "N", "ANN", "PERF",
     "RUF", "I",
