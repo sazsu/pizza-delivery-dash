@@ -82,7 +82,7 @@ class MainMenu(GameLoop):
         Button(x, y, width, height, color, sprites_group)
 
     def calculate_button_dimensions(self) -> tuple[int, int]:
-        return self.screen.width // 5, self.height // 8
+        return self.screen.width // 5, self.screen.height // 8
 
     def calculate_button_offsets(
         self, button_width: int, button_height: int
