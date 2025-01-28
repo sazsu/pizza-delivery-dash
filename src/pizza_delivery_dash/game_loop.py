@@ -17,7 +17,7 @@ class GameLoop:
                 self.set_state(State.quitting)
             self.handle_event(event)
 
-    def handle_event(self, event: pygame.Event) -> None:
+    def handle_event(self, event: pygame.event.Event) -> None:
         pass
 
     def set_state(self, new_state: State) -> None:
@@ -30,9 +30,6 @@ class GameLoop:
             pygame.display.set_caption(f'Current FPS: {current_fps:.0f}')
             clock.tick(Config.FPS)
             self.handle_events()
-
-    def load_background_image(self, image_name: str) -> None:
-        self.screen.blit(self.sprites[image_name])
 
     @property
     def state(self) -> State:
