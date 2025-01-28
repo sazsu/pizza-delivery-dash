@@ -3,7 +3,9 @@ from dataclasses import dataclass
 import pygame
 
 from config import Config
+from pizza_delivery_dash.buttons import LevelButton
 from pizza_delivery_dash.game_loop import GameLoop
+from pizza_delivery_dash.level import Level
 from pizza_delivery_dash.state import State
 
 
@@ -32,13 +34,24 @@ class MainMenu(GameLoop):
 
     def handle_mouse_click(self) -> None:
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        if self.check_mouse_hit_level_button(mouse_x, mouse_y):
-            self.enter_level((mouse_x, mouse_y))
+        # if self.check_mouse_hit_level_button(mouse_x, mouse_y):
+        clicked_button = self.get_clicked_button(mouse_x, mouse_y)
+        if clicked_button:
+            self.enter_level(clicked_button.level_id)
 
-    def enter_level(self, coords: tuple[int, int]) -> None:
+    def enter_level(self, level_id: int) -> None:
         # level = self.game.levels[coords]
         # level.loop()
-        print('level entered')
+        print(f'Level with id {level_id} entered')
+        Level(self.game, 'level1.txt').loop()
+
+    def get_clicked_button(
+        self, mouse_x: int, mouse_y: int
+    ) -> LevelButton | None:
+        for button in self.buttons_sprites_group:
+            if button.rect.collidepoint(mouse_x, mouse_y):
+                return button
+        return None
 
     def check_mouse_hit_level_button(self, mouse_x: int, mouse_y: int) -> bool:
         return any(
@@ -66,6 +79,7 @@ class MainMenu(GameLoop):
                 width,
                 button_height,
                 pygame.Color('white'),
+                i,
                 sprites_group,
             )
         return sprites_group
@@ -77,9 +91,10 @@ class MainMenu(GameLoop):
         width: int,
         height: int,
         color: pygame.Color,
+        level_id: int,
         sprites_group: pygame.sprite.Group,
     ) -> None:
-        Button(x, y, width, height, color, sprites_group)
+        LevelButton(x, y, width, height, color, level_id, sprites_group)
 
     def calculate_button_dimensions(self) -> tuple[int, int]:
         return self.screen.width // 5, self.screen.height // 8
@@ -101,20 +116,3 @@ class MainMenu(GameLoop):
         x = left_margin + width * i + spacing * i
         y = top_margin
         return x, y
-
-
-class Button(pygame.sprite.Sprite):
-    def __init__(
-        self,
-        x: int,
-        y: int,
-        width: int,
-        height: int,
-        color: pygame.Color,
-        *groups: pygame.sprite.Group,
-    ) -> None:
-        super().__init__(*groups)
-        self.image = pygame.Surface((width, height))
-        pygame.draw.rect(self.image, color, (0, 0, width, height))
-        self.rect = self.image.get_rect(topleft=(x, y))
-        self.color = color
