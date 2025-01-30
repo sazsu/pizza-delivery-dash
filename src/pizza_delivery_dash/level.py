@@ -44,13 +44,6 @@ class Level(GameLoop):
             self.all_level_sprites,
         )
 
-    def loop(self) -> None:
-        clock = pygame.time.Clock()
-        while self.state != State.quitting:
-            self.handle_events()
-            self.update_display()
-            clock.tick(Config.FPS)
-
     def handle_events(self) -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

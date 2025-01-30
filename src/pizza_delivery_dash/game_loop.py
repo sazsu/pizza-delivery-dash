@@ -24,12 +24,15 @@ class GameLoop:
         self.game.set_state(new_state)
 
     def loop(self) -> None:
-        clock = pygame.Clock()
+        clock = pygame.time.Clock()
         while self.state != State.quitting:
-            current_fps = clock.get_fps()
-            pygame.display.set_caption(f'Current FPS: {current_fps:.0f}')
-            clock.tick(Config.FPS)
+            self.update_display()
             self.handle_events()
+            clock.tick(Config.FPS)
+
+    def update_display(self) -> None:
+        current_fps = pygame.time.Clock().get_fps()
+        pygame.display.set_caption(f'Current FPS: {current_fps:.0f}')
 
     @property
     def state(self) -> State:
