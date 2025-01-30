@@ -8,16 +8,7 @@ from pizza_delivery_dash.base_sprite import BaseSprite
 from pizza_delivery_dash.game_loop import GameLoop
 from pizza_delivery_dash.player import Player
 from pizza_delivery_dash.state import State
-
-
-def parse_level(level_name: str) -> list[list[str]]:
-    cwd = os.getcwd()
-    with open(
-        os.path.join(cwd, 'src', 'pizza_delivery_dash', 'levels', level_name)
-    ) as f:
-        data = f.readlines()
-    data = list(map(lambda x: x.strip().split(), data))
-    return data
+from utils import parse_level
 
 
 class Tile(BaseSprite):
@@ -68,6 +59,7 @@ class Level(GameLoop):
             self.handle_event(event)
 
     def handle_keyboard(self, pressed: tuple[bool]) -> None:
+        self.player.moving = True
         if pressed[pygame.K_a]:
             self.player.rect.x -= self.player.velocity
         elif pressed[pygame.K_d]:
@@ -76,18 +68,25 @@ class Level(GameLoop):
             self.player.rect.y -= self.player.velocity
         elif pressed[pygame.K_s]:
             self.player.rect.y += self.player.velocity
+        else:
+            self.player.moving = False
 
     def update_display(self) -> None:
-        self.screen.fill(pygame.Color('black'))
+        self.fill_bg()
         self.draw_sprites()
-        self.all_level_sprites.update()
+        self.update_sprites()
         pygame.display.flip()
+
+    def fill_bg(self) -> None:
+        self.screen.fill(pygame.Color('black'))
+
+    def update_sprites(self) -> None:
+        self.all_level_sprites.update()
 
     def draw_sprites(self) -> None:
         for sprite in sorted(
             self.all_level_sprites, key=lambda sprite: (sprite.z, sprite.y)
         ):
-            # print(type(sprite), sprite.z)
             self.screen.blit(sprite.image, sprite.rect)
 
     def load_tiles(self, tile_size: int) -> None:
@@ -101,13 +100,7 @@ class Level(GameLoop):
                 else:
                     image = self.load_tile(char, tiles_directory, tile_size)
                     cache_images[char] = image
-                if char.isnumeric() or char == 'g':
-                    z = 0
-                elif char in Config.BUILDING_LAYER:
-                    # print(char, x, y)
-                    z = 2
-                else:
-                    z = 1
+                z = self.get_z_index(char)
                 Tile(
                     image,
                     x * tile_size,
@@ -118,6 +111,16 @@ class Level(GameLoop):
 
     def calculate_tile_size(self) -> int:
         return round(self.screen.height / Config.TILES_PER_SCREEN_VERT)
+
+    @staticmethod
+    def get_z_index(char: str) -> int:
+        if char.isnumeric() or char == 'g':
+            z = 0
+        elif char in Config.BUILDING_LAYER:
+            z = 2
+        else:
+            z = 1
+        return z
 
     @staticmethod
     def get_tiles_directory() -> str:
