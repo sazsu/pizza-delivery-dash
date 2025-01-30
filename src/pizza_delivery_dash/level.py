@@ -27,7 +27,7 @@ class Level(GameLoop):
             1,
             'player',
             ['player_1', 'player_2', 'player_3'],
-            10,
+            5,
             self.all_level_sprites,
         )
 
@@ -45,17 +45,19 @@ class Level(GameLoop):
         pygame.display.flip()
 
     def handle_keyboard(self, pressed: tuple[bool]) -> None:
-        self.player.moving = True
+        self.player.moving = False
         if pressed[pygame.K_a]:
             self.player.rect.x -= self.player.velocity
-        elif pressed[pygame.K_d]:
+            self.player.moving = True
+        if pressed[pygame.K_d]:
             self.player.rect.x += self.player.velocity
-        elif pressed[pygame.K_w]:
+            self.player.moving = True
+        if pressed[pygame.K_w]:
             self.player.rect.y -= self.player.velocity
-        elif pressed[pygame.K_s]:
+            self.player.moving = True
+        if pressed[pygame.K_s]:
             self.player.rect.y += self.player.velocity
-        else:
-            self.player.moving = False
+            self.player.moving = True
 
     def fill_bg(self) -> None:
         self.screen.fill(pygame.Color('black'))
