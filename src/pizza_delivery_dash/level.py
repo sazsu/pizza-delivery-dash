@@ -49,6 +49,7 @@ class Level(GameLoop):
             1,
             'player',
             ['player_1', 'player_2', 'player_3'],
+            10,
             self.all_level_sprites,
         )
 
@@ -68,24 +69,25 @@ class Level(GameLoop):
 
     def handle_keyboard(self, pressed: tuple[bool]) -> None:
         if pressed[pygame.K_a]:
-            self.player.rect.x -= 10
+            self.player.rect.x -= self.player.velocity
         elif pressed[pygame.K_d]:
-            self.player.rect.x += 10
+            self.player.rect.x += self.player.velocity
         elif pressed[pygame.K_w]:
-            self.player.rect.y -= 10
+            self.player.rect.y -= self.player.velocity
         elif pressed[pygame.K_s]:
-            self.player.rect.y += 10
+            self.player.rect.y += self.player.velocity
 
     def update_display(self) -> None:
         self.screen.fill(pygame.Color('black'))
-        self.draw_tiles()
+        self.draw_sprites()
         self.all_level_sprites.update()
         pygame.display.flip()
 
-    def draw_tiles(self) -> None:
+    def draw_sprites(self) -> None:
         for sprite in sorted(
             self.all_level_sprites, key=lambda sprite: (sprite.z, sprite.y)
         ):
+            # print(type(sprite), sprite.z)
             self.screen.blit(sprite.image, sprite.rect)
 
     def load_tiles(self, tile_size: int) -> None:
@@ -101,11 +103,11 @@ class Level(GameLoop):
                     cache_images[char] = image
                 if char.isnumeric() or char == 'g':
                     z = 0
-                elif char in ['a', 'b', 'c', 'd', 'i', 'j', 'k', 'l']:
+                elif char in Config.BUILDING_LAYER:
+                    # print(char, x, y)
                     z = 2
                 else:
                     z = 1
-                z = 0 if char.isnumeric() or char == 'g' else 1
                 Tile(
                     image,
                     x * tile_size,
