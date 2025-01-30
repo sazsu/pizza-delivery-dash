@@ -4,24 +4,11 @@ from dataclasses import dataclass, field
 import pygame
 
 from config import Config
-from pizza_delivery_dash.base_sprite import BaseSprite
 from pizza_delivery_dash.game_loop import GameLoop
 from pizza_delivery_dash.player import Player
 from pizza_delivery_dash.state import State
+from pizza_delivery_dash.tile import Tile
 from utils import parse_level
-
-
-class Tile(BaseSprite):
-    def __init__(
-        self,
-        image: pygame.Surface,
-        x: int,
-        y: int,
-        z: int,
-        *groups: pygame.sprite.Group,
-    ) -> None:
-        super().__init__(image, z, *groups)
-        self.rect = self.image.get_rect(topleft=(x, y))
 
 
 @dataclass
@@ -51,6 +38,12 @@ class Level(GameLoop):
             self.handle_keyboard(pygame.key.get_pressed())
             self.handle_event(event)
 
+    def update_display(self) -> None:
+        self.fill_bg()
+        self.draw_sprites()
+        self.update_sprites()
+        pygame.display.flip()
+
     def handle_keyboard(self, pressed: tuple[bool]) -> None:
         self.player.moving = True
         if pressed[pygame.K_a]:
@@ -63,12 +56,6 @@ class Level(GameLoop):
             self.player.rect.y += self.player.velocity
         else:
             self.player.moving = False
-
-    def update_display(self) -> None:
-        self.fill_bg()
-        self.draw_sprites()
-        self.update_sprites()
-        pygame.display.flip()
 
     def fill_bg(self) -> None:
         self.screen.fill(pygame.Color('black'))
