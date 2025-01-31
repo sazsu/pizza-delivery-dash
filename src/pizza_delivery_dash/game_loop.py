@@ -26,8 +26,8 @@ class GameLoop:
     def loop(self) -> None:
         clock = pygame.time.Clock()
         while self.state != State.quitting:
-            self.update_display()
             self.handle_events()
+            self.update_display()
             clock.tick(Config.FPS)
 
     def update_display(self) -> None:
