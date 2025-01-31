@@ -31,3 +31,13 @@ def set_colorkey(
 
 def convert_alpha(image: pygame.Surface) -> pygame.Surface:
     return image.convert_alpha()
+
+
+def parse_level(level_name: str) -> list[list[str]]:
+    cwd = os.getcwd()
+    with open(
+        os.path.join(cwd, 'src', 'pizza_delivery_dash', 'levels', level_name)
+    ) as f:
+        data = f.readlines()
+    data = list(map(lambda x: x.strip().split(), data))
+    return data
