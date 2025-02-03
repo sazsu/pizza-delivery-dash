@@ -80,11 +80,11 @@ uv run python src/main.py
 python src/main.py
 ```
 
-#### Презентация
+## Презентация
 
 [figma](https://www.figma.com/deck/wVk7DbWxfKL2eawT7rHCsR/PDD-presentation?node-id=2-25&t=T0U2XQP8z4YqvxbW-1)
 
-#### Благодарности
+## Благодарности
 
 [Pico-8 City](https://kenney.nl/assets/pico-8-city), лицензировано на условиях [CC0 1.0 Universal](https://creativecommons.org/public-domain/cc0/)
 
@@ -92,6 +92,6 @@ python src/main.py
 
 [Super Market 2D Tileset](https://blockydk.itch.io/supermarket-tileset), сделанный Blocky, лицензировано на условиях [CC BY](https://creativecommons.org/licenses/by/4.0/)
 
-#### Лицензия
+## Лицензия
 
 MIT
