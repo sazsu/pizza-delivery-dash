@@ -1,13 +1,5 @@
-from pizza_delivery_dash.game import PizzaDeliveryDash
-
-
-def run_game() -> None:
-    game = PizzaDeliveryDash.create()
-    game.loop()
-
+from pizza_delivery_dash.app_pizza import PizzaApp
 
 if __name__ == '__main__':
-    try:
-        run_game()
-    except Exception as e:
-        print(f'Exception occured: {e}')
+    app = PizzaApp()
+    app.run()
