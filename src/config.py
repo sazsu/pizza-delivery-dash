@@ -1,7 +1,8 @@
 class Config:
     FPS = 60
-    WIDTH = HEIGHT = 1024
-    TILES_PER_SCREEN_VERT = 16
+    TILE_SIZE = 8
+    PLAYER_VELOCITY = 2  # pixels/step
+    PLAYER_NAME = 'Игрок №1'
     BUILDING_LAYER = frozenset(
         [
             'a',
@@ -15,10 +16,10 @@ class Config:
             'lwq',
             'wq',
             'rwq',
-            'lm',
-            'n',
-            'o',
-            'rm',
             'p',
         ]
     )
+
+
+def dbg(msg: str) -> None:
+    print(f'[d] {msg}')
