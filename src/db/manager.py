@@ -2,10 +2,6 @@ import os
 import sqlite3
 import time
 
-# TODO: fetch and put game results in a db
-
-# TODO: programmatically create db on startup
-
 
 class Database:
     def __init__(self, name: str) -> None:

@@ -7,7 +7,6 @@ PRAGMA foreign_keys = off;
 BEGIN TRANSACTION;
 
 -- Table: Stats
--- DROP TABLE IF EXISTS Stats;
 
 CREATE TABLE IF NOT EXISTS Stats (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
