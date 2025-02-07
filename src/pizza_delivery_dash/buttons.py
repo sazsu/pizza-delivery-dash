@@ -1,4 +1,5 @@
 import pygame
+from pygame import Color
 
 
 class Button(pygame.sprite.Sprite):
@@ -9,25 +10,21 @@ class Button(pygame.sprite.Sprite):
         width: int,
         height: int,
         color: pygame.Color,
+        button_code: int,
+        button_text: str,
         *groups: pygame.sprite.Group,
     ) -> None:
         super().__init__(*groups)
         self.image = pygame.Surface((width, height))
-        pygame.draw.rect(self.image, color, (0, 0, width, height))
-        self.rect = self.image.get_rect(topleft=(x, y))
+
         self.color = color
-
-
-class LevelButton(Button):
-    def __init__(
-        self,
-        x: int,
-        y: int,
-        width: int,
-        height: int,
-        color: pygame.Color,
-        level_id: int,
-        *groups: pygame.sprite.Group,
-    ) -> None:
-        super().__init__(x, y, width, height, color, *groups)
-        self.level_id: int = level_id
+        self.button_code = button_code
+        self.button_text = button_text
+        pygame.draw.rect(self.image, color, (0, 0, width, height))
+        # draw text
+        self.font = pygame.font.Font(None, size=24)
+        img = self.font.render(
+            self.button_text, True, Color('black'), self.color
+        )
+        self.image.blit(img, (x // 16, y // 8))
+        self.rect = self.image.get_rect(topleft=(x, y))
