@@ -21,6 +21,7 @@ class PizzaApp(App):
         self.game_results = []  # player_name, date_time, result, score
         self.shop_visited = False
         self.pizzeria_visited = False
+        self.toggle_fullscreen()
         # TODO: make a dictionary to navigate from scene to scene
         self.add_scene(
             MainMenuScene(self.screen, self.callback_result, 'Main Menu')
